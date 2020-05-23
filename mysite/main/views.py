@@ -10,10 +10,10 @@ from django.contrib import messages
 # Create your views here.
 
 def homepage(request):
-    contacts = Contact.objects.all()
+    title = "Generic Data Handler homepage"
     return render(request=request,
                   template_name="main/homepage.html",
-                  context={"contacts": contacts})
+                  context={"title": title})
 
 
 def new_contact(request):
@@ -55,32 +55,6 @@ def edit_contact(request, id):
             "title": title,
         }
     return render(request, "main/edit_contact.html", context)
-
-
-def contacts(request):
-    
-    # For field headings in template
-    contact_fields = [f.verbose_name for f in Contact._meta.get_fields()]
-    # contact_fields.remove("id")
-    contact_fields.remove("Updated")
-    contact_fields.remove("Created")
-    
-    contacts = Contact.objects.all()
-    data = []
-    for contact in contacts:
-        contact_dict = contact.__dict__
-        # del contact_dict[""]
-        # del contact_dict["id"]
-        data.append(contact_dict)
-    ContactFormSet = formset_factory(Contact_Form, extra=0)
-    formset = ContactFormSet(initial=data)
-    
-    return render(
-        request=request,
-        template_name="main/contacts.html",
-        context={"formset": formset,
-                 "contact_fields": contact_fields},
-        )
 
 
 def contacts_update(request):
