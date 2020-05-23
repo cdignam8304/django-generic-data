@@ -1,7 +1,7 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
-from .models import Contact
-from .forms import Contact_Form
+from .models import Contact, Generic, Schema
+from .forms import Contact_Form, Schema_Supplier_Form
 from .models import Contact
 from django.forms import formset_factory
 from django.forms.models import modelformset_factory
@@ -87,5 +87,25 @@ def contacts_update(request):
     return render(request, "main/contacts_update.html", context)
 
 
-
+def suppliers_update(request):
+    title = "Update Suppliers"
+    
+    SupplierFormset = modelformset_factory(model=Generic, form=Schema_Supplier_Form("Supplier"), extra=0)
+    formset = SupplierFormset(request.POST or None)
+    if formset.is_valid():
+        instances = formset.save(commit=False)
+        
+        for instance in instances:
+            instance.save()
+        
+        messages.success(request, f"Suppliers updated")
+    else:
+        if request.POST: # So don't get error when first load page (GET request)
+            messages.error(request, formset.errors)
+        
+    context = {
+            "formset": formset,
+            "title": title,
+        }
+    return render(request, "main/suppliers_update.html", context)
 
