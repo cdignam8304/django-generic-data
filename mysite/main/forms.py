@@ -29,23 +29,7 @@ class Contact_Form(forms.ModelForm):
 #         if fname != "": 
 #             print(fname)
 
-class Schema_Supplier_Form(forms.ModelForm):
-    
-    class Meta():
-        all_fields = [field.name for field in Schema._meta.get_fields()[1:]]
-        supplier_fields = []
-        for field in all_fields:
-            fname = getattr(Schema.objects.all().filter(schema_name__exact="Supplier")[0], field)
-            if fname != "":
-                supplier_fields.append(fname)
-        
-        model = Generic
-        fields = supplier_fields
-        
-    def __init__(self, schema=None, *args, **kwargs):
-        super(Schema_Supplier_Form, self).__init__(*args, **kwargs)
-        if schema:
-            self.fields["schema_name"].initial = schema
+
 
 
 
