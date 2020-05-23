@@ -30,7 +30,7 @@ class Contact_Form(forms.ModelForm):
 #             print(fname)
 
 
-class Generic_Form(forms.ModelFormd):
+class Generic_Form(forms.ModelForm):
     
     class Meta:
         model = Generic
