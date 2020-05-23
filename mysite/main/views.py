@@ -88,4 +88,11 @@ def contacts_update(request):
 
 
 
-
+def generic_update(request, schema):
+    context = {}
+    title = "Generic update page"
+    context["title"] = title
+    context["schema"] = schema
+    
+    return render(request, "main/generic_update.html", context)
+    

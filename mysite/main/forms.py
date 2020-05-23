@@ -30,6 +30,24 @@ class Contact_Form(forms.ModelForm):
 #             print(fname)
 
 
+class Generic_Form(forms.ModelFormd):
+    
+    class Meta:
+        model = Generic
+        fields = [
+            'schema_name',
+            'string1',
+            'string2',
+            'string3',
+            'string4',
+            'string5',
+            'date1',
+            'date2',
+            'date3',
+            'amount1',
+            'amount2',
+            'status',
+            ]
 
 
 

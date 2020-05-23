@@ -21,4 +21,5 @@ app_name = "main" # used for creating custom urls, so don't have to hard code ur
 urlpatterns = [
     path("", views.homepage, name="homepage"),
     path("contacts_update/", views.contacts_update, name="contacts_update"),
+    path("generic_update/<schema>/", views.generic_update, name="generic_update"),
 ]
