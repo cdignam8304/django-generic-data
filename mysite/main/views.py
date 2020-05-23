@@ -1,7 +1,7 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
 from .models import Contact, Generic, Schema
-from .forms import Contact_Form, Schema_Supplier_Form
+from .forms import Contact_Form
 from .models import Contact
 from django.forms import formset_factory
 from django.forms.models import modelformset_factory
