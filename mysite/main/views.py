@@ -95,7 +95,7 @@ def generic_update(request, schema):
     context["schema"] = schema
     
     GenericFormset = modelformset_factory(model=Generic, form=Generic_Form, extra=0)
-    formset = GenericFormset(request.POST or None, queryset=Generic.objects.filter(schema_name=schema))
+    formset = GenericFormset(request.POST or None, queryset=Generic.objects.filter(schema_name__schema_name=schema))
     if formset.is_valid():
         instances = formset.save(commit=False)
         
