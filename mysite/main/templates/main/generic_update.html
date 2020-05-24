@@ -10,6 +10,25 @@
     <h2 style="color: green; text-align: center;">{{ title }}</h2>
     <h3 style="color: green; text-align: center;">{{ schema }}</h3>
      
+     
+     <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
+            
+        <table>
+            {% for form in formset %}
+                {{ form }}
+            {% endfor %}
+        </table>
+        
+        <br>
+        <br>
+        
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save
+            <i class="material-icons right">save</i>
+        </button>
+        
+    </form>
+     
     <!--
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}

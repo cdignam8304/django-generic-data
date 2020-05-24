@@ -1,7 +1,7 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
 from .models import Contact, Generic, Schema
-from .forms import Contact_Form
+from .forms import Contact_Form, Generic_Form
 from .models import Contact
 from django.forms import formset_factory
 from django.forms.models import modelformset_factory
@@ -93,6 +93,22 @@ def generic_update(request, schema):
     title = "Generic update page"
     context["title"] = title
     context["schema"] = schema
+    
+    GenericFormset = modelformset_factory(model=Generic, form=Generic_Form, extra=0)
+    formset = GenericFormset(request.POST or None, queryset=Generic.objects.filter(schema_name=schema))
+    if formset.is_valid():
+        instances = formset.save(commit=False)
+        
+        for instance in instances:
+            instance.save()
+        
+        messages.success(request, f"Records updated")
+    else:
+        if request.POST: # So don't get error when first load page (GET request)
+            messages.error(request, formset.errors)
+    
+    context["formset"] = formset
+    
     
     return render(request, "main/generic_update.html", context)
     
