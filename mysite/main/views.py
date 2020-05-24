@@ -90,9 +90,23 @@ def contacts_update(request):
 
 def generic_update(request, schema):
     context = {}
-    title = "Generic update page"
+    title = f"{schema} update page"
     context["title"] = title
-    context["schema"] = schema
+    
+    # Code to get list of fields for an instance of Schema:
+    generic_fields = []
+    specific_fields = []
+    fieldnames = [field.name for field in Schema._meta.get_fields()[3:]]
+    for field in fieldnames: 
+        fname = getattr(Schema.objects.all().filter(schema_name__exact=schema)[0], field) 
+        if fname != "INACTIVE": 
+            generic_fields.append(field)
+            specific_fields.append(fname)
+    # schema_fields = schema_fields[2:] # Take out id and schema name
+    context["generic_fields"] = generic_fields
+    context["specific_fields"] = specific_fields
+    
+    
     
     GenericFormset = modelformset_factory(model=Generic, form=Generic_Form, extra=0)
     formset = GenericFormset(request.POST or None, queryset=Generic.objects.filter(schema_name__schema_name=schema))
@@ -108,7 +122,6 @@ def generic_update(request, schema):
             messages.error(request, formset.errors)
     
     context["formset"] = formset
-    
     
     return render(request, "main/generic_update.html", context)
     

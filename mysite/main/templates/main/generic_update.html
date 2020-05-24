@@ -8,8 +8,17 @@
 
 
     <h2 style="color: green; text-align: center;">{{ title }}</h2>
-    <h3 style="color: green; text-align: center;">{{ schema }}</h3>
      
+    {{ generic_fields.1 }}
+    <br>
+    {{ generic_fields }}
+    <br>
+    {{ specific_fields }}
+    <br>
+    {{ specific_fields|length }}
+    <br>
+
+    
      
      <form method="post">{% csrf_token %}
         {{ formset.management_form }}
