@@ -22,8 +22,9 @@ class Generic_Form(forms.ModelForm):
     
     class Meta:
         model = Generic
-        fields = [field.name for field in Schema._meta.get_fields()[3:]] # strip out model name, id and schema name with [3:]
-
+        fields = [field.name for field in Schema._meta.get_fields()]
+        fields.remove("schema_name")
+        fields.remove("generic")
 
 
 

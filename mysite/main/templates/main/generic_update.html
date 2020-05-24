@@ -40,6 +40,9 @@
     </form>
     EXPERIMENT CODE - END-->
      
+    {{ generic_fields }}
+    <br>
+    {{ specific_fields }}
     
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}

@@ -96,13 +96,14 @@ def generic_update(request, schema):
     # Code to get list of fields for an instance of Schema:
     generic_fields = []
     specific_fields = []
-    fieldnames = [field.name for field in Schema._meta.get_fields()[3:]]
+    fieldnames = [field.name for field in Schema._meta.get_fields()]
+    fieldnames.remove("schema_name")
+    fieldnames.remove("generic")
     for field in fieldnames: 
         fname = getattr(Schema.objects.all().filter(schema_name__exact=schema)[0], field) 
         if fname != "INACTIVE": 
             generic_fields.append(field)
             specific_fields.append(fname)
-    # schema_fields = schema_fields[2:] # Take out id and schema name
     context["generic_fields"] = generic_fields
     context["specific_fields"] = specific_fields
     
