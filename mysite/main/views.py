@@ -6,6 +6,7 @@ from .models import Contact
 from django.forms import formset_factory
 from django.forms.models import modelformset_factory
 from django.contrib import messages
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -107,9 +108,7 @@ def generic_update(request, schema):
     context["generic_fields"] = generic_fields
     context["specific_fields"] = specific_fields
     
-    
-    
-    GenericFormset = modelformset_factory(model=Generic, form=Generic_Form, extra=0)
+    GenericFormset = modelformset_factory(model=Generic, form=Generic_Form, extra=1)
     formset = GenericFormset(request.POST or None, queryset=Generic.objects.filter(schema_name__schema_name=schema))
     if formset.is_valid():
         instances = formset.save(commit=False)
@@ -118,6 +117,7 @@ def generic_update(request, schema):
             instance.save()
         
         messages.success(request, f"Records updated")
+        return redirect(f"/generic_update/{schema}/")
     else:
         if request.POST: # So don't get error when first load page (GET request)
             messages.error(request, formset.errors)

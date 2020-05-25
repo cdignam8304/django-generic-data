@@ -9,50 +9,15 @@
 
     <h2 style="color: green; text-align: center;">{{ title }}</h2>
      
-    <!-- EXPERIMENT CODE - START...
-    {{ generic_fields.1 }}
-    <br>
-    {{ generic_fields }}
-    <br>
-    {{ specific_fields }}
-    <br>
-    {{ specific_fields|length }}
-    <br>
-
-    
-     
-     <form method="post">{% csrf_token %}
-        {{ formset.management_form }}
-            
-        <table>
-            {% for form in formset %}
-                {{ form }}
-            {% endfor %}
-        </table>
-        
-        <br>
-        <br>
-        
-        <button class="btn waves-effect waves-light" type="submit" name="action">Save
-            <i class="material-icons right">save</i>
-        </button>
-        
-    </form>
-    EXPERIMENT CODE - END-->
-     
-    {{ generic_fields }}
-    <br>
-    {{ specific_fields }}
     
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
-        
             
         <table>
         
             <thead>
                 <tr>
-                    {% for name in specific_fields %}
+                    {% for name in specific_fields|slice:"1:" %}
                         <th>{{ name }}</th>
                     {% endfor %}
                 </tr>
