@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+import os
+from django.conf import settings
 
 # Create your models here.
 
@@ -73,6 +75,8 @@ class Schema(models.Model):
     amount1 = models.CharField("amount1", max_length=200, blank=True)
     amount2 = models.CharField("amount2", max_length=200, blank=True)
     status = models.CharField("status", max_length=200, blank=True)
+    photo = models.ImageField(upload_to="media",
+                                     default = os.path.join(settings.MEDIA_URL,"placeholder.jpeg"))
     
     class Meta():
         verbose_name_plural = "Schemas"

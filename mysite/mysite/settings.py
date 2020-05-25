@@ -125,3 +125,8 @@ STATIC_URL = '/static/'
 
 # ISO 8601 datetime format to accept html5 datetime input values
 DATETIME_INPUT_FORMATS += ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M"]
+
+
+# For images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
