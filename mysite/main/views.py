@@ -12,6 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from .forms import NewUserForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -26,7 +27,7 @@ def homepage(request):
                   template_name="main/homepage.html",
                   context=context)
 
-
+@login_required(login_url="/login/")
 def generic_update(request, schema):
     context = {}
     title = f"Edit {schema}"
@@ -121,6 +122,7 @@ def login_request(request):
                   context={"form": form})
 
 
+@login_required(login_url="/login/")
 def get_user_profile(request, username):
     
     if request.user.is_authenticated:
