@@ -22,10 +22,13 @@ class Generic_Form(forms.ModelForm):
     
     class Meta:
         model = Generic
-        fields = [field.name for field in Schema._meta.get_fields()]
-        fields.remove("schema_name")
-        fields.remove("generic")
+        # fields = [field.name for field in Schema._meta.get_fields()]
+        # fields.remove("schema_name")
+        # fields.remove("generic")
 
+        fields = [field.name for field in Generic._meta.get_fields()]
+        fields.remove("created_at")
+        fields.remove("last_updated")
 
 
 

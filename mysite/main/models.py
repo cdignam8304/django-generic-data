@@ -72,6 +72,7 @@ class Schema(models.Model):
     date3 = models.CharField("date3", max_length=200, blank=True)
     amount1 = models.CharField("amount1", max_length=200, blank=True)
     amount2 = models.CharField("amount2", max_length=200, blank=True)
+    status = models.CharField("status", max_length=200, blank=True)
     
     class Meta():
         verbose_name_plural = "Schemas"
