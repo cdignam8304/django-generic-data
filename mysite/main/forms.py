@@ -1,23 +1,8 @@
 from django import forms
-from .models import Contact, Schema, Generic
+from .models import Generic
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-
-class Contact_Form(forms.ModelForm):
-    
-    class Meta:
-        model = Contact
-        fields = [
-            "first_name",
-            "last_name",
-            "email",
-            "city",
-            "dob",
-            "contact_type",
-            "mktg_opt_in",
-            "is_active",
-            ]
 
 
 class Generic_Form(forms.ModelForm):
