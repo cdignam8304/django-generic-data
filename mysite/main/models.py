@@ -3,6 +3,10 @@ from django.utils import timezone
 import os
 from django.conf import settings
 
+# Useful tutorial for database indexing and other db commands
+# https://www.sqlitetutorial.net/sqlite-index/
+
+
 # Create your models here.
 
 
