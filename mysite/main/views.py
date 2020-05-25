@@ -91,8 +91,9 @@ def contacts_update(request):
 
 def generic_update(request, schema):
     context = {}
-    title = f"{schema} update page"
+    title = f"Edit {schema}"
     context["title"] = title
+    context["schema"] = schema
     
     # Code to get list of fields for an instance of Schema:
     generic_fields = []

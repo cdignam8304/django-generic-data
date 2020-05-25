@@ -5,9 +5,16 @@
 {% block content %}
 
 {% load static %} <!-- This method of serving images is for dev only! -->
+    
+    <!--
+    {{ generic_fields }}
+    <br>
+    {{ specific_fields }}
+    <br>
+    -->
 
-
-    <h2 style="color: green; text-align: center;">{{ title }}</h2>
+    <h3 style="color: green; text-align: center;">{{ title }}</h3>
+    <br>
      
     
     <form method="post">{% csrf_token %}
@@ -27,7 +34,7 @@
                 {% for form in formset %}
                     <tr>
                         {% for field in form %}
-                            {% if field.name in generic_fields %}                            
+                            {% if field.name in generic_fields %}
                                 <td>{{ field }}</td>
                             {% endif %}
                         {% endfor %}
@@ -37,7 +44,6 @@
         
         </table>
         
-        <br>
         <br>
         <br>
         

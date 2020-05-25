@@ -122,3 +122,13 @@ class Generic(models.Model):
     
     def __str__(self):
         return f"{self.schema_name}: {self.string1}"
+    
+    
+    # This isn't being applied in the form
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return [
+                "schema_name",
+                ]
+        else:
+            return []
